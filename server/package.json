@@ -13,14 +13,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.2",
-    "nodemon": "^2.0.20",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1",
-    "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^7.1.2"
+    "nodemon": "^2.0.20"
   },
+  "type" : "commonjs",
   "abbrev": "^1.1.1",
   "accepts": "^1.3.8",
   "anymatch": "^3.1.3",

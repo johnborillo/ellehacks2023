@@ -1,8 +1,10 @@
-import React,{useState,useEffect} from "react";
-import { Button, Menu, MenuItem, Fade } from "@mui/material";
+import React,{useContext} from "react";
+import { UserContext } from "../../contexts/userContext";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { Link,Outlet } from "react-router-dom";
+import './Header.css';
 
 const Header = () => {
-
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -12,33 +14,45 @@ const Header = () => {
         setAnchorEl(null);
     };
 
+    const {successAuth}=useContext(UserContext)
+
 
     return (
-    <div>
-      <Button
-        id="fade-button"
-        aria-controls={open ? 'fade-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        Dashboard
-      </Button>
-      <Menu
-        id="fade-menu"
-        MenuListProps={{
-          'aria-labelledby': 'fade-button',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Fade}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
-    </div>
+      <>
+        <div className="headerContainer">
+            <h1>XXX</h1>
+            <div className="header-right">
+                <Button
+                    id="menu-button"
+                    aria-controls={open ? "menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                    sx={{color:"#F2ECE1", fontSize:"18px"}}
+                >
+                    Dashboard
+                </Button>
+                <Menu
+                    id="menu"
+                    MenuListProps={{
+                        "aria-labelledby": "menu-button",
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                >
+                    <Link style={{ textDecoration: "none", color: "black" }}>
+                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                    </Link>
+                    <Link to='auth' style={{ textDecoration: "none", color: "black" }}>
+                        <MenuItem onClick={handleClose}>{successAuth? "Logout":"Login/Signup"}</MenuItem>
+                    </Link>
+                </Menu>
+            </div>
+        </div> 
+        <Outlet/>
+      </>
+
     )
 }
 

@@ -1,14 +1,19 @@
 import Header from "./components/Header/Header";
+import AuthPage from "./pages/AuthPage";
+import HomePage from "./pages/HomePage";
+import CharityDetails from "./pages/CharityDetails";
+import CharitySummary from "./pages/CharitySummary";
 import CharityCards from "./components/CharityCards/CharityCards";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      <h1>Hi</h1>
-      <CharityCards />
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Header/>}>
+        <Route index element={<HomePage/>}/>
+        <Route path="auth" element={<AuthPage/>}/>
+      </Route>
+    </Routes>
   );
 }
 
