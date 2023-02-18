@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+img {
+  opacity: 0.9;
+  z-index: -1;
+}
+.intro {
+  position: absolute;
+  font-weight: 900;
+  font-size: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  z-index: 999;
+}
