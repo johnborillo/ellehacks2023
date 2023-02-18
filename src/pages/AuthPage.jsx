@@ -7,7 +7,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-
+import {Ni}
 const AuthPage = () => {
   const [signUp, setSignUp] = useState(false);
   const handleChange = () => {
@@ -21,7 +21,6 @@ const AuthPage = () => {
     let password = e.target.elements.password.value;
     let firstName = e.target.elements.firstName.value;
     let lastName = e.target.elements.lastName.value;
-    console.log(email, password, firstName, lastName);
 
     if (signUp) {
       fetch("http://localhost:4000/api/register", {
@@ -56,7 +55,7 @@ const AuthPage = () => {
           if (data.error_message) {
             alert(data.error_message);
           } else {
-            console.log(data.data);
+            console.log("success");
             localStorage.setItem("username", data.data.username);
           }
         })
