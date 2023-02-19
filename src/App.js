@@ -8,7 +8,7 @@ import Test from "./pages/Test";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Header />}>
+      <Route path="/" >
         <Route index element={<HomePage />} />
         <Route path="chat" element={<Test />} />
         <Route path="auth" element={<AuthPage />} />

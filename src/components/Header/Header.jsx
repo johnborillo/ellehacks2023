@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
 import "./Header.css";
+import div1 from "../../assets/div1.png";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,12 +21,12 @@ const Header = () => {
   return (
     <>
       <div className="headerContainer">
-        <Link style={{ textDecoration: "none", color: "black" }} to="/">
-          <h1>Donation Hub</h1>
-        </Link>
+        <div className="flex-container">
+          <img className="div-2" src={div1} />
+        </div>
         <div className="header-right">
           <Link
-            style={{ textDecoration: "none", color: "black" }}
+            style={{ textDecoration: "none", color: "white" }}
             to="/charity"
           >
             <span>Charity</span>

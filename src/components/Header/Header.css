@@ -1,12 +1,23 @@
+@import url('http://fonts.googleapis.com/css?family=Roboto');
+
+
+.flex-container img{
+  position: absolute;
+  width: 100px;
+  height: auto;
+  margin-top: 5px;
+}
+
 .headerContainer {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: #99d09f;
+  background: #202020;
 }
+
 .header-right {
   display: flex;
   align-items: center;
-  color: #272424;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 18px;
+  font-family: Roboto, Georgia, "Times New Roman", Times, serif;
 }
