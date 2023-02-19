@@ -29,7 +29,7 @@ const Header = () => {
         <div className="header-right">
           <Link
             style={{ textDecoration: "none", color: "white" }}
-            to="/chat"
+            to="/search"
           >
             <span>Search</span>
           </Link>

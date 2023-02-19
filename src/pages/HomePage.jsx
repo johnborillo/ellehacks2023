@@ -25,7 +25,7 @@ const HomePage = () => {
         </span>
         <Stack spacing={2} direction="row">
           <Button variant="contained" style={{ backgroundColor: "#202020" }} component={Link}
-            to="/chat">Search</Button>
+            to="/search">Search</Button>
         </Stack>
         <div className="div-3">
           <a href="https://ellehacks.com/">

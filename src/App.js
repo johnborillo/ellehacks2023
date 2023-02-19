@@ -8,11 +8,7 @@ import Search from "./pages/Search";
 function App() {
   return (
     <Routes>
-<<<<<<< HEAD
       <Route path="/" element={<Header />} >
-=======
-      <Route path="/">
->>>>>>> 1d60525f1715dee28ca19e7933b61632c0244ef8
         <Route index element={<HomePage />} />
         <Route path="search" element={<Search />} />
         <Route path="auth" element={<AuthPage />} />
