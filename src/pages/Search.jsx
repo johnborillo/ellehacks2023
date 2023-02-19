@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Configuration, OpenAIApi } from "openai";
 
-function Test() {
+function Search() {
   const [prompt, setPrompt] = useState("");
   const [placesList, setPlacesList] = useState([]);
 
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: process.env.REACT_APP_OPENAI_KEY,
   });
   const openai = new OpenAIApi(configuration);
 
@@ -37,13 +37,17 @@ function Test() {
         max_tokens: 1000,
       });
       //   console.log(placeInfo);
-      placeInfoList.push("  " + placeInfo.data.choices[0].text);
+      placeInfoList.push("\n" + placeInfo.data.choices[0].text);
     }
     // console.log(placeInfoList);
     setPlacesList(placeInfoList);
   };
 
-  const listItems = placesList.map((item) => <li>{item}</li>);
+  const listItems = placesList.map((item, i) => (
+    <li key={i}>
+      {i + 1}: {item}
+    </li>
+  ));
 
   return (
     <div>
@@ -60,4 +64,4 @@ function Test() {
   );
 }
 
-export default Test;
+export default Search;
