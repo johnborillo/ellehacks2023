@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { Configuration, OpenAIApi } from "openai";
 
-function Test() {
+function Search() {
   const [prompt, setPrompt] = useState("");
-  const [placeInfoList, setPlaceInfoList] = useState([]);
+  const [placesList, setPlacesList] = useState([]);
 
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: process.env.REACT_APP_OPENAI_KEY,
   });
   const openai = new OpenAIApi(configuration);
 
   let places;
+  let placeInfoList = [];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,29 +26,28 @@ function Test() {
     let answers = answer.replace(numRegex, "~*");
     places = answers.split("~*");
 
-    console.log(answers);
-    console.log(places);
+    // console.log(answers);
+    // console.log(places);
 
-    setPlaceInfoList(placeInfoList);
+    for (let i = 1; i < places.length; i++) {
+      let placePrompt = "Tell me about the " + places[i];
+      let placeInfo = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: placePrompt,
+        max_tokens: 1000,
+      });
+      //   console.log(placeInfo);
+      placeInfoList.push("\n" + placeInfo.data.choices[0].text);
+    }
+    // console.log(placeInfoList);
+    setPlacesList(placeInfoList);
   };
 
-  useEffect(() => {
-    const func = async () => {
-      for (let i = 1; i < places.length; i++) {
-        let placePrompt = "Tell me about the " + places[i];
-        let placeInfo = await openai.createCompletion({
-          model: "text-davinci-003",
-          prompt: placePrompt,
-          max_tokens: 1000,
-        });
-        console.log(placeInfo);
-        placeInfoList.push(<p key={i}>{placeInfo}</p>);
-        //setResponse(placeInfo.data.choices[0].text);
-      }
-    };
-    func();
-    setPlaceInfoList(placeInfoList);
-  }, []);
+  const listItems = placesList.map((item, i) => (
+    <li key={i}>
+      {i + 1}: {item}
+    </li>
+  ));
 
   return (
     <div>
@@ -58,10 +58,10 @@ function Test() {
           onChange={(e) => setPrompt(e.target.value)}
         />
         <button type="submit">Submit</button>
-        {placeInfoList}
+        <ul>{listItems}</ul>
       </form>
     </div>
   );
 }
 
-export default Test;
+export default Search;
