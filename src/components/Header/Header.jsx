@@ -21,6 +21,12 @@ const Header = () => {
       <div className="headerContainer">
         <h1>Donation Hub</h1>
         <div className="header-right">
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/charity"
+          >
+            <span>Charity</span>
+          </Link>
           <Button
             id="menu-button"
             aria-controls={open ? "menu" : undefined}

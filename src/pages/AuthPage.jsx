@@ -16,10 +16,50 @@ const AuthPage = () => {
 
   const sumbitHandler = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    console.log(data);
+    const data = new FormData(e.target);
+    let email = e.target.elements.email.value;
+    let password = e.target.elements.password.value;
+    let firstName = e.target.elements.firstName.value;
+    let lastName = e.target.elements.lastName.value;
+
     if (signUp) {
+      fetch("http://localhost:4000/api/register", {
+        method: "POST",
+        body: JSON.stringify({ email, password, firstName, lastName }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error_message) {
+            alert(data.error_message);
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch((err) => console.error(err));
     } else {
+      fetch("http://localhost:4000/api/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error_message) {
+            alert(data.error_message);
+          } else {
+            console.log("success");
+            localStorage.setItem("username", data.data.username);
+          }
+        })
+        .catch((err) => console.error(err));
     }
   };
 
@@ -58,9 +98,19 @@ const AuthPage = () => {
             margin="normal"
             required
             fullWidth
-            id="name"
-            label="Name"
-            name="name"
+            id="firstName"
+            label="First Name"
+            name="first name"
+          />
+        </Fade>
+        <Fade in={signUp}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="lastName"
+            label="Last Name"
+            name="last name"
           />
         </Fade>
         <Button

@@ -1,58 +1,65 @@
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const passport = require("passport");
-
-if (process.env.NODE_ENV !== "production") {
-  // Load environment variables from .env file in non prod environments
-  require("dotenv").config();
-}
-require("./utils/connectdb");
-
-require("./strategies/JwtStrategy");
-require("./strategies/LocalStrategy");
-require("./authenticate");
-
-const userRouter = require("./routes/userRoutes");
-
 const app = express();
+const PORT = 4000;
 
-app.use(bodyParser.json());
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors());
 
-//Add the client URL to the CORS policy
-
-const whitelist = process.env.WHITELISTED_DOMAINS
-  ? process.env.WHITELISTED_DOMAINS.split(",")
-  : [];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-
-app.use(passport.initialize());
-
-app.use("/users", userRouter);
-
-app.get("/", function (req, res) {
-  res.send({ status: "success" });
+app.get("/api", (req, res) => {
+  res.json({ message: "Hello world" });
 });
 
-//Start the server in port 8081
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
 
-const server = app.listen(process.env.PORT || 8081, function () {
-  const port = server.address().port;
+const users = [];
 
-  console.log("App started at port:", port);
+const generateID = () => Math.random().toString(36).substring(2, 10);
+
+app.post("/api/register", (req, res) => {
+  const { email, password, firstName, lastName } = req.body;
+  //👇🏻 Logs the credentials to the console
+  let result = users.filter((user) => user.email === email);
+
+  if (result.length === 0) {
+    //👇🏻 creates the structure for the user
+    const newUser = { id: generateID(), email, password, firstName, lastName };
+    //👇🏻 Adds the user to the array of users
+    users.push(newUser);
+    //👇🏻 Returns a message
+    return res.json({
+      message: "Account created successfully!",
+    });
+  }
+  //👇🏻 Runs if a user exists
+  res.json({
+    error_message: "User already exists",
+  });
+});
+
+app.post("/api/login", (req, res) => {
+  // Accepts the user's credentials
+  const { email, password } = req.body;
+  // Checks for user(s) with the same email and password
+  let result = users.filter(
+    (user) => user.email === email && user.password === password
+  );
+
+  //👇🏻 If no user exists, it returns an error message
+  if (result.length !== 1) {
+    return res.json({
+      error_message: "Incorrect credentials",
+    });
+  }
+
+  //👇🏻 Returns the username of the user after a successful login
+  res.json({
+    message: "Login successfully",
+    data: {
+      username: result[0].username,
+    },
+  });
 });

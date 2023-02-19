@@ -1,24 +1,14 @@
 import { createContext, useState } from "react";
 
-const UserContext = createContext({
+export const UserContext = createContext({
   successAuth: false,
   setSuccessAuth: () => {},
 });
-let initialState = {};
 
-const UserProvider = ({ props }) => {
+export const UserProvider = ({ children }) => {
   //the user is successfully login/signup
   const [successAuth, setSuccessAuth] = useState(false);
 
   const value = { successAuth, setSuccessAuth };
-
-  const [state, setState] = useState(initialState);
-
-  return (
-    <UserContext.Provider value={[state, setState]}>
-      {props.children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
-
-export { UserContext, UserProvider };
