@@ -3,14 +3,15 @@ import { Configuration, OpenAIApi } from "openai";
 
 function Test() {
   const [prompt, setPrompt] = useState("");
-  const [placeInfoList, setPlaceInfoList] = useState([]);
+  const [placesList, setPlacesList] = useState([]);
 
   const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
   });
   const openai = new OpenAIApi(configuration);
 
   let places;
+  let placeInfoList = [];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,29 +26,24 @@ function Test() {
     let answers = answer.replace(numRegex, "~*");
     places = answers.split("~*");
 
-    console.log(answers);
-    console.log(places);
+    // console.log(answers);
+    // console.log(places);
 
-    setPlaceInfoList(placeInfoList);
+    for (let i = 1; i < places.length; i++) {
+      let placePrompt = "Tell me about the " + places[i];
+      let placeInfo = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: placePrompt,
+        max_tokens: 1000,
+      });
+      //   console.log(placeInfo);
+      placeInfoList.push("  " + placeInfo.data.choices[0].text);
+    }
+    // console.log(placeInfoList);
+    setPlacesList(placeInfoList);
   };
 
-  useEffect(() => {
-    const func = async () => {
-      for (let i = 1; i < places.length; i++) {
-        let placePrompt = "Tell me about the " + places[i];
-        let placeInfo = await openai.createCompletion({
-          model: "text-davinci-003",
-          prompt: placePrompt,
-          max_tokens: 1000,
-        });
-        console.log(placeInfo);
-        placeInfoList.push(<p key={i}>{placeInfo}</p>);
-        //setResponse(placeInfo.data.choices[0].text);
-      }
-    };
-    func();
-    setPlaceInfoList(placeInfoList);
-  }, []);
+  const listItems = placesList.map((item) => <li>{item}</li>);
 
   return (
     <div>
@@ -58,7 +54,7 @@ function Test() {
           onChange={(e) => setPrompt(e.target.value)}
         />
         <button type="submit">Submit</button>
-        {placeInfoList}
+        <ul>{listItems}</ul>
       </form>
     </div>
   );
