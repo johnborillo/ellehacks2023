@@ -1,15 +1,14 @@
 /* eslint-disable jsx-a11y/alt-text */
 import * as React from "react";
+import { Link } from 'react-router-dom';
 import "./HomePage.css";
-import div1 from "../assets/div1.png";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Header from "../components/Header/Header";
 import "../components/Header/Header.css"
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const HomePage = () => {
   return (
-    <><Header /><div className="frontendpeersafetech">
+    <><div className="frontendpeersafetech">
       <div className="div">
         <div className="flex-container">
           <img className="div-2" />
@@ -24,22 +23,14 @@ const HomePage = () => {
           Easily find and support NGOs that align with your interests and causes
           you care about.
         </span>
-        <Box
-          component="form"
-          sx={{
-            "& > :not(style)": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="filled-basic"
-            label="Enter NGO"
-            variant="filled"
-            style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }} />
-        </Box>
+        <Stack spacing={2} direction="row">
+          <Button variant="contained" style={{ backgroundColor: "#202020" }} component={Link}
+            to="/chat">Search</Button>
+        </Stack>
         <div className="div-3">
-          <span className="made-for-nw-hacks">@ElleHacks2023</span>
+          <a href="https://ellehacks.com/">
+            <span className="made-for-nw-hacks">@ElleHacks2023</span>
+          </a>
           <span className="about-us">About Us</span>
         </div>
       </div>

@@ -22,9 +22,17 @@ const Header = () => {
     <>
       <div className="headerContainer">
         <div className="flex-container">
-          <img className="div-2" src={div1} />
+          <a href="/">
+            <img className="div-2" src={div1} />
+          </a>
         </div>
         <div className="header-right">
+          <Link
+            style={{ textDecoration: "none", color: "white" }}
+            to="/chat"
+          >
+            <span>Search</span>
+          </Link>
           <Link
             style={{ textDecoration: "none", color: "white" }}
             to="/charity"

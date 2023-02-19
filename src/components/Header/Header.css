@@ -1,6 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Roboto');
 
-
 .flex-container img{
   position: absolute;
   width: 100px;
@@ -17,6 +16,7 @@
 
 .header-right {
   display: flex;
+  gap: 1cm;
   align-items: center;
   font-size: 18px;
   font-family: Roboto, Georgia, "Times New Roman", Times, serif;
