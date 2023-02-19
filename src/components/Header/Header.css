@@ -1,0 +1,12 @@
+.headerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #99d09f;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  color: #272424;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
