@@ -19,7 +19,9 @@ const Header = () => {
   return (
     <>
       <div className="headerContainer">
-        <h1>Donation Hub</h1>
+        <Link style={{ textDecoration: "none", color: "black" }} to="/">
+          <h1>Donation Hub</h1>
+        </Link>
         <div className="header-right">
           <Link
             style={{ textDecoration: "none", color: "black" }}
@@ -46,7 +48,10 @@ const Header = () => {
             open={open}
             onClose={handleClose}
           >
-            <Link style={{ textDecoration: "none", color: "black" }}>
+            <Link
+              style={{ textDecoration: "none", color: "black" }}
+              to="/account"
+            >
               <MenuItem onClick={handleClose}>My account</MenuItem>
             </Link>
             <Link to="auth" style={{ textDecoration: "none", color: "black" }}>

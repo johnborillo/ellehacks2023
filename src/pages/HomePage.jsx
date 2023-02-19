@@ -1,12 +1,17 @@
 import React from "react";
-import Header from "../components/Header/Header.jsx";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 const HomePage = () => {
   return (
-    <>
-      <h1 className="intro">HI THIS IS OUR WEBSITE</h1>
+    <div
+      style={{
+        backgroundImage: `url(${"https://t3.ftcdn.net/jpg/02/02/48/64/360_F_202486456_ORGHZ3kGd2wUcICkt0RxCLAYFyOzpEn4.jpg"})`,
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+      }}
+    >
+      <h1 className="intro">GLOBE</h1>
       <Box
         component="form"
         sx={{
@@ -17,11 +22,30 @@ const HomePage = () => {
       >
         <TextField id="filled-basic" label="Filled" variant="filled" />
       </Box>
-      <img
-        src="https://t3.ftcdn.net/jpg/02/02/48/64/360_F_202486456_ORGHZ3kGd2wUcICkt0RxCLAYFyOzpEn4.jpg"
-        width="100%"
-      />
-    </>
+      <div className="container">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar
+          sapien a lacinia tincidunt. Mauris rutrum quam vel purus bibendum, vel
+          faucibus ex finibus. Sed auctor vitae orci vel euismod. Aliquam
+          fermentum, nulla id ultricies vestibulum, sapien eros ultricies
+          mauris, eu varius felis felis ac mi.
+        </p>
+        <p>
+          Integer non pharetra sapien, ac pulvinar quam. Vivamus commodo, purus
+          eu laoreet malesuada, ex nisl eleifend nibh, at lobortis ipsum nisl
+          vel risus.
+        </p>
+        <div className="cta">
+          <a href="#">Donate Now</a>
+        </div>
+      </div>
+      <footer className="footer">
+        <p>&copy; 2023 Lorem Ipsum Charity. All rights reserved.</p>
+        <p>
+          <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </p>
+      </footer>
+    </div>
   );
 };
 

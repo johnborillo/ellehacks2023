@@ -7,12 +7,15 @@ import {
   Button,
   TextField,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
   const [signUp, setSignUp] = useState(false);
   const handleChange = () => {
     setSignUp((prev) => !prev);
   };
+
+  const navigate = useNavigate();
 
   const sumbitHandler = async (e) => {
     e.preventDefault();
@@ -56,6 +59,14 @@ const AuthPage = () => {
             alert(data.error_message);
           } else {
             console.log("success");
+            let path = `/account`;
+            navigate(path, {
+              state: {
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+              },
+            });
             localStorage.setItem("username", data.data.username);
           }
         })

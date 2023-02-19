@@ -16,7 +16,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1000,
+  width: 1200,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -138,8 +138,8 @@ const CharityItem = ({ charity }) => {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <ReactEcharts option={option1} />
-            <ReactEcharts option={option2} />
+            <ReactEcharts option={option1} style={{ height: "250px" }} />
+            <ReactEcharts option={option2} style={{ height: "220px" }} />
             <Typography
               sx={{
                 color: "#00CCCC",
@@ -169,10 +169,8 @@ const CharityItem = ({ charity }) => {
             >
               Where you can find us?
             </Typography>
-            <Typography>{address}</Typography>
-            <Typography>{email}</Typography>
-            <Typography>{phone}</Typography>
-            <Typography>{website}</Typography>
+            <Typography>{`Address: ${address}`}</Typography>
+            <Typography>Website: {website}</Typography>
           </Box>
         </Fade>
       </Modal>
